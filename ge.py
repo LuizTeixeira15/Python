@@ -1,25 +1,19 @@
 from typing import Counter
 import requests
 from bs4 import BeautifulSoup
+from lxml import etree
 
-# header = {
-#     "User-Agent":
-#     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
-# }
+header = {
+    "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+}
 
-# page = requests.get(
-#     "https://ge.globo.com/futebol/brasileirao-serie-a/",
-#     headers=header,
-# )
+page = requests.get(
+    "https://ge.globo.com/futebol/brasileirao-serie-a/",
+    headers=header,
+)
 
 # dom = etree.HTML(str(soup))
-
-# atributos = {'class': 'g'}
-
-# time = soup.find_all(
-#     "strong", class_="classificacao__equipes classificacao__equipes--nome")
-# pts = soup.find_all("th")
-# jogos = soup.find_all("span", class_="time-sigla")
 
 # print('{0:30} ==> {1}'.format('Time', 'Pontos'))
 # print('-' * 40)
