@@ -2,6 +2,7 @@ from typing import Counter
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
+from openpyxl import Workbook
 
 header = {
     "User-Agent":
@@ -9,26 +10,38 @@ header = {
 }
 
 page = requests.get(
-    "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2023",
+    "https://atrativatur.com.br/programacao.php",
     headers=header,
 )
 soup = BeautifulSoup(page.content, "html.parser")
+# soup = BeautifulSoup(html_doc, "html.parser")
 dom = etree.HTML(str(soup))
 
 # print(page.content)
 
 # atributos = {'class': 'g'}
 
-time = soup.find_all("span", class_="hidden-xs")
-pts = soup.find_all("th")
-jogos = soup.find_all("span", class_="time-sigla")
+# time = soup.find_all("div", class_="table-mes")
+td = soup.find_all("tbody")
+time = soup.find_all("div", class_="table-mes")
+# jogos = soup.find_all("span", class_="time-sigla")
 
-print('{0:30} ==> {1}'.format('Time', 'Pontos'))
-print('-' * 40)
+for mes in time: #soup.find_all("div", class_="table-mes"):
+     td = soup.find_all("tbody")
+     if mes.text == 'Fevereiro':
+         print(td.text)
 
-for i in range(5):
-    print(f'{i+1}º {time[i].text:30} ==>  {pts[i + 14].text}')
-    print('=' * 40)
+
+    # for titulo in soup.find_all("th"):        
+    #     print(titulo.text)
+    
+
+# print('{0:30} ==> {1}'.format('Time', 'Pontos'))
+# print('-' * 40)
+
+# for i in range(10):
+#     print(f'{time[i].text:30} ==>  {pts[i].text}')
+#     print('=' * 40)
 
 # print('\n')
 # time_casa = dom.xpath(
