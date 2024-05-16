@@ -9,52 +9,54 @@ header = {
 }
 
 page = requests.get(
-    "https://ge.globo.com/futebol/brasileirao-serie-a/",
+    "https://ge.globo.com/futebol/libertadores/",
     headers=header,
 )
 soup = BeautifulSoup(page.content, "html.parser")
 dom = etree.HTML(str(soup))
 
-print(page.content)
+# print(page.content)
 
 atributos = {'class': 'g'}
 
-time = soup.find_all("div", class_="textLayer")
-pts = soup.find_all("th")
-jogos = soup.find_all("span", class_="time-sigla")
+print(soup.find_all("table"))
 
-print(time)
-print('{0:30} ==> {1}'.format('Time', 'Pontos'))
-print('-' * 40)
+# time = soup.find_all("div", class_="textLayer")
+# pts = soup.find_all("th")
+# jogos = soup.find_all("span", class_="time-sigla")
 
-for i in range(5):
-    print(f'{time[i].text:30} ==>  {pts[i + 14].text}')
-    print('=' * 40)
+# print(time)
+# print('{0:30} ==> {1}'.format('Time', 'Pontos'))
+# print('-' * 40)
 
-print('\n')
-time_casa = dom.xpath(
-    '/html/body/div[1]/div[2]/div[4]/div/div[116]/div[2]/div[11]')
+# for i in range(5):
+#     print(f'{time[i].text:30} ==>  {pts[i + 14].text}')
+#     print('=' * 40)
 
-time_fora = dom.xpath(
-    "/html/body/div[1]/main/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/div[2]/span"
-)
+# print('\n')
+# time_casa = dom.xpath(
+#     '/html/body/div[1]/div[2]/div[4]/div/div[116]/div[2]/div[11]')
 
-placar = dom.xpath(
-    '//*[@id="menu-panel"]/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/strong/span'
-)
+# time_fora = dom.xpath(
+#     "/html/body/div[1]/main/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/div[2]/span"
+# )
 
-for i in range(10):
-    # print(time_casa[i].text, placar[i].text, time_fora[i].text)
-    try:
-        # print(i + 1, "º ", time_casa[i].text, placar[i].text,
-        #       time_fora[i].text)
-        print(
-            f'{i+1:2}º ==> {time_casa[i].text:4} {placar[i].text} {time_fora[i].text:>4}'
-        )
-        # print(i + 1, "º ", time_casa[i].text, placar[i].text,
-        #       time_fora[i].text)
-    except:
-        print(
-            f'{i + 1:2}º ==> { time_casa[i].text:6} x {time_fora[i].text:>6}')
+# placar = dom.xpath(
+#     '//*[@id="menu-panel"]/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/strong/span'
+# )
 
-print(i + 1, "º", time[i].text, "=>", pts[i + 14].text)
+# for i in range(10):
+#     # print(time_casa[i].text, placar[i].text, time_fora[i].text)
+#     try:
+#         # print(i + 1, "º ", time_casa[i].text, placar[i].text,
+#         #       time_fora[i].text)
+#         print(
+#             f'{i+1:2}º ==> {time_casa[i].text:4} {placar[i].text} {time_fora[i].text:>4}'
+#         )
+#         # print(i + 1, "º ", time_casa[i].text, placar[i].text,
+#         #       time_fora[i].text)
+#     except:
+#         print(
+#             f'{i + 1:2}º ==> { time_casa[i].text:6} x {time_fora[i].text:>6}')
+
+# print(i + 1, "º", time[i].text, "=>", pts[i + 14].text)
