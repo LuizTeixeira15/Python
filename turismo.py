@@ -22,14 +22,31 @@ dom = etree.HTML(str(soup))
 # atributos = {'class': 'g'}
 
 # time = soup.find_all("div", class_="table-mes")
-td = soup.find_all("tbody")
-time = soup.find_all("div", class_="table-mes")
+tr = soup.find_all("tbody")
+
+# time = soup.find_all("div", class_="table-mes")
 # jogos = soup.find_all("span", class_="time-sigla")
 
-for mes in time: #soup.find_all("div", class_="table-mes"):
-     td = soup.find_all("tbody")
-     if mes.text == 'Fevereiro':
-         print(td.text)
+for td in tr:
+    print(td.find())
+
+# for i, td in enumerate(tr):
+#     if i == 6:
+#         print(td.get_text())
+    
+
+# for td  in tr:
+#     print(td.get_text())
+
+    # if mes.text == "Junho":
+        # print(mes)
+        # print(soup.find_all("tbody"))
+        # print(dom.xpath('//*[@id="viagens"]/div[2]/table/tbody/tr[1]/td[2]')[0].text)
+
+        # for td in soup.find_all("tbody"):
+        #     print(td.text)
+
+
 
 
     # for titulo in soup.find_all("th"):        

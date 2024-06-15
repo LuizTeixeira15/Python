@@ -9,7 +9,7 @@ header = {
 }
 
 page = requests.get(
-    "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2023",
+    "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2019",
     headers=header,
 )
 soup = BeautifulSoup(page.content, "html.parser")

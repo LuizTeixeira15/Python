@@ -2,6 +2,8 @@ from typing import Counter
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
+from parsel import Selector
+import json
 
 header = {
     "User-Agent":
@@ -9,21 +11,16 @@ header = {
 }
 
 page = requests.get(
-    "https://ge.globo.com/futebol/libertadores/",
+    "https://ge.globo.com/futebol/brasileirao-serie-a/",
     headers=header,
 )
 soup = BeautifulSoup(page.content, "html.parser")
 dom = etree.HTML(str(soup))
 
-# print(page.content)
+s = Selector(text=page.text)
+html = s.xpath('//*[@id="scriptReact"]/text()')
 
-atributos = {'class': 'g'}
-
-print(soup.find_all("table"))
-
-# time = soup.find_all("div", class_="textLayer")
-# pts = soup.find_all("th")
-# jogos = soup.find_all("span", class_="time-sigla")
+print(html["nome_popular"].get())
 
 # print(time)
 # print('{0:30} ==> {1}'.format('Time', 'Pontos'))
