@@ -28,7 +28,7 @@ tr = soup.find_all("tbody")
 # jogos = soup.find_all("span", class_="time-sigla")
 
 for td in tr:
-    print(td.find())
+    print(td.find().get_text())
 
 # for i, td in enumerate(tr):
 #     if i == 6:
