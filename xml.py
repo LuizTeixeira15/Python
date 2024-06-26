@@ -1,7 +1,5 @@
-import os
-import responses
-import json
 import requests
+import json
 
 # print(os.path.realpath(__file__))
 
@@ -14,10 +12,11 @@ headers = {
 url = "https://script.google.com/macros/s/AKfycbySC5SkEYzn36O5CWNLMOiPTJZSN33dwDGhwYcJN_MYhSsq2ROK2JVqUq67ZLv4TRiX/exec"
 headers={'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"}
 
-response = requests.request("GET",url,headers=headers)
-t = response.json()
-# t = json.dumps(t)
-# res = json.loads(t)
-print(t['out'][1])
-# for i, r in enumerate(res):
-#     print(res[i])
+def buscar():
+    req = requests.get(url)
+    todos  = json.loads(req.content)
+    # print(todos)
+    print(todos['out'][0]['cte'])
+
+if __name__ == '__main__':
+    buscar()
