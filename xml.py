@@ -16,7 +16,9 @@ def buscar():
     req = requests.get(url)
     todos  = json.loads(req.content)
     # print(todos)
-    print(todos['out'][0]['cte'])
+    for i, c in enumerate(req):
+        # print(i)
+        print(f"{i} - {todos['out'][i]['cte']}")
 
-if __name__ == '__main__':
-    buscar()
+
+buscar()
