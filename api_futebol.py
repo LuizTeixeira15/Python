@@ -16,27 +16,29 @@ headers = {
 
 response = requests.request("GET", api_futebol, headers=headers, data=payload)
 print(response)
-t = response.json()
-t = json.dumps(t)
-res = json.loads(t)
-for i, c in enumerate(res):
-    if c['time']['nome_popular'].upper() == 'FLAMENGO':
-      print(c['time']['nome_popular'])
-      print(f"Posição: {c['posicao']}")
-      print(f"Pontos: {c['pontos']}")
-      print(f"Jogos: {c['jogos']}")
-      print(f"Vitorias: {c['vitorias']}")
-      print(f"Empates: {c['empates']}")
-      print(f"Derrotas: {c['derrotas']}")
-      print(f"Gols pro: {c['gols_pro']}")
-      print(f"Gols contra: {c['gols_contra']}")
-      print(f"Saldo gols: {c['saldo_gols']}")
-      print(f"Aproveitamento: {c['aproveitamento']}%")
-      print(f"Variacao posição: {c['variacao_posicao']}")
-      print(f"Ultimos jogos: {c['ultimos_jogos']}")
+
+
+# t = response.json()
+# t = json.dumps(t)
+# res = json.loads(t)
+# for i, c in enumerate(res):
+#     if c['time']['nome_popular'].upper() == 'FLAMENGO':
+#       print(c['time']['nome_popular'])
+#       print(f"Posição: {c['posicao']}")
+#       print(f"Pontos: {c['pontos']}")
+#       print(f"Jogos: {c['jogos']}")
+#       print(f"Vitorias: {c['vitorias']}")
+#       print(f"Empates: {c['empates']}")
+#       print(f"Derrotas: {c['derrotas']}")
+#       print(f"Gols pro: {c['gols_pro']}")
+#       print(f"Gols contra: {c['gols_contra']}")
+#       print(f"Saldo gols: {c['saldo_gols']}")
+#       print(f"Aproveitamento: {c['aproveitamento']}%")
+#       print(f"Variacao posição: {c['variacao_posicao']}")
+#       print(f"Ultimos jogos: {c['ultimos_jogos']}")
       
-for i, c in enumerate(res):
-    print(f"\nPosição: {c['posicao']:02} - {c['time']['nome_popular']} - {c['pontos']} - {c['jogos']} - {c['aproveitamento']}%")
+# for i, c in enumerate(res):
+#     print(f"\nPosição: {c['posicao']:02} - {c['time']['nome_popular']} - {c['pontos']} - {c['jogos']} - {c['aproveitamento']}%")
     
       
       # print(f"Pontos: ")

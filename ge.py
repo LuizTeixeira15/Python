@@ -1,59 +1,50 @@
-from typing import Counter
 import requests
-from bs4 import BeautifulSoup
-from lxml import etree
-from parsel import Selector
 import json
 
-header = {
-    "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+# URL da API GraphQL do GE
+url = "https://globo.com"
+
+# Query para solicitar os dados da tabela do Brasileirão Série A
+payload = {
+    "query": """
+    query Classificacao($campeonato: String!, $fase: String!) {
+      classificacao(campeonato: $campeonato, fase: $fase) {
+        nome
+        posicao
+        pontos
+        jogos
+        vitorias
+        empates
+        derrotas
+        gols_pro
+        gols_contra
+        saldo_gols
+      }
+    }
+    """,
+    "variables": {
+        "campeonato": "brasileirao-serie-a",
+        "fase": "fase-unica"
+    }
 }
 
-page = requests.get(
-    "https://ge.globo.com/futebol/brasileirao-serie-a/",
-    headers=header,
-)
-soup = BeautifulSoup(page.content, "html.parser")
-dom = etree.HTML(str(soup))
+headers = {
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
 
-s = Selector(text=page.text)
-html = s.xpath('//*[@id="scriptReact"]/text()')
+response = requests.post(url, json=payload, headers=headers)
 
-print(html["nome_popular"].get())
+if response.status_code == 200:
+    dados = response.json()
+    times = dados['data']['classificacao']
+    
+    print(f"{'Pos':<4}{'Time':<20}{'Pts':<5}{'J':<4}{'V':<4}{'SG':<4}")
+    print("-" * 45)
+    for time in times:
+        print(f"{time['posicao']:<4}{time['nome']:<20}{time['pontos']:<5}{time['jogos']:<4}{time['vitorias']:<4}{time['saldo_gols']:<4}")
+else:
+    print(f"Erro ao acessar a API: {response.status_code}")
 
-# print(time)
-# print('{0:30} ==> {1}'.format('Time', 'Pontos'))
-# print('-' * 40)
 
-# for i in range(5):
-#     print(f'{time[i].text:30} ==>  {pts[i + 14].text}')
-#     print('=' * 40)
 
-# print('\n')
-# time_casa = dom.xpath(
-#     '/html/body/div[1]/div[2]/div[4]/div/div[116]/div[2]/div[11]')
-
-# time_fora = dom.xpath(
-#     "/html/body/div[1]/main/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/div[2]/span"
-# )
-
-# placar = dom.xpath(
-#     '//*[@id="menu-panel"]/article/div[1]/div/div/section[1]/div[2]/aside/div/div[17]/div/ul/li/div/div/a/strong/span'
-# )
-
-# for i in range(10):
-#     # print(time_casa[i].text, placar[i].text, time_fora[i].text)
-#     try:
-#         # print(i + 1, "º ", time_casa[i].text, placar[i].text,
-#         #       time_fora[i].text)
-#         print(
-#             f'{i+1:2}º ==> {time_casa[i].text:4} {placar[i].text} {time_fora[i].text:>4}'
-#         )
-#         # print(i + 1, "º ", time_casa[i].text, placar[i].text,
-#         #       time_fora[i].text)
-#     except:
-#         print(
-#             f'{i + 1:2}º ==> { time_casa[i].text:6} x {time_fora[i].text:>6}')
-
-# print(i + 1, "º", time[i].text, "=>", pts[i + 14].text)
