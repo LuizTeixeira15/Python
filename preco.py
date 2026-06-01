@@ -13,4 +13,4 @@ site = requests.get(url, headers=headers)
 soup = BeautifulSoup(site.content, 'html.parser')
 list = soup.find(id = "card-list")
 
-print(list.prettify())
+print(list.get_text())
